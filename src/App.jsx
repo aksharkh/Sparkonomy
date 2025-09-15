@@ -1,8 +1,7 @@
-
 import React from "react";
 import { FaWifi } from "react-icons/fa6";
 import { GiNetworkBars, GiCrown } from "react-icons/gi";
-import { IoBatteryFull } from "react-icons/io5";
+import { IoBatteryFull, IoPawSharp } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
 import { CgProfile } from "react-icons/cg";
 import { FiPlusCircle, FiCalendar } from "react-icons/fi";
@@ -12,7 +11,6 @@ import IncomeTrendCard from "./common/IncomeTrendCard";
 import CombinedChart from "./common/CombinedChart";
 
 export default function App() {
-
   const chartData = [
     { month: "Jan", income: 3500, momGrowth: 5 },
     { month: "Feb", income: 5000, momGrowth: 15 },
@@ -21,7 +19,6 @@ export default function App() {
     { month: "May", income: 5200, momGrowth: 40 },
     { month: "Jun", income: 0, momGrowth: -100 },
   ];
-
 
   const earningsData = {
     total: { title: "Total Earnings", amount: "$1,25,000" },
@@ -80,7 +77,6 @@ export default function App() {
 
   return (
     <div className="bg-[#E7CCE5] max-w-sm h-screen mx-auto flex flex-col">
-      
       <div className="flex justify-between items-center p-4 text-sm">
         <span className="font-bold">9:45</span>
         <div className="flex gap-2">
@@ -90,7 +86,6 @@ export default function App() {
         </div>
       </div>
 
-      
       <div className="flex justify-between items-center px-4 pb-2">
         <button className="flex items-center gap-1 text-gray-700">
           <IoIosArrowBack /> Back
@@ -99,9 +94,7 @@ export default function App() {
         <CgProfile className="text-xl" />
       </div>
 
-      
       <div className="bg-white flex-1 rounded-t-3xl p-4 overflow-y-auto no-scrollbar">
-        
         <div className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center">
           <FiPlusCircle className="text-4xl" />
           <h1 className="mt-3 font-bold bg-gradient-to-b from-pink-400 to-purple-600 bg-clip-text text-transparent">
@@ -116,14 +109,12 @@ export default function App() {
           Or upload an existing invoice and set payment reminder
         </p>
 
-       
         <div className="space-y-4 mt-6">
           <EarningsCard
             title={earningsData.total.title}
             amount={earningsData.total.amount}
           />
 
-          
           <div className="flex gap-4">
             {earningsData.halfCards.map((card, index) => (
               <div key={index} className="w-1/2">
@@ -137,27 +128,23 @@ export default function App() {
           </div>
         </div>
 
-        
         <div className="bg-white rounded-2xl shadow-sm p-3 mt-6">
           <div className="flex items-center justify-between">
             <h4 className="text-sm font-semibold text-gray-600">Time Period</h4>
-           
+
             <div className="text-xs text-gray-400">dd:mm:yyyy - dd:mm:yyyy</div>
           </div>
 
           <div className="mt-3 flex items-center gap-3 flex-wrap">
             <div className="flex items-center gap-3 flex-wrap">
-              
               <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
                 1Month
               </div>
 
-             
               <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-purple-100 text-purple-600">
                 3Months
               </div>
 
-              
               <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
                 1Year
                 <GiCrown className="text-xs text-purple-500" />
@@ -166,7 +153,6 @@ export default function App() {
 
             <div className="flex-1" />
 
-            
             <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
               <FiCalendar className="text-base" />
               <span className="text-sm">Custom</span>
@@ -174,12 +160,10 @@ export default function App() {
           </div>
         </div>
 
-    
         <div className="w-full mt-4">
           <CombinedChart data={chartData} />
         </div>
 
-     
         <div className="mt-6 space-y-3 pb-6">
           {incomeTrends.map((item, index) => (
             <IncomeTrendCard
@@ -191,6 +175,19 @@ export default function App() {
               showBell={item.showBell}
             />
           ))}
+        </div>
+        {/* Footer Branding */}
+        <div className="flex items-center justify-center mt-8 mb-6">
+          <div className="text-center">
+            <h1 className="text-xl">
+              <span className="font-bold text-gray-700">Spark</span>
+              <IoPawSharp className="inline-block text-gray-600 mx-1" />
+              <span className="text-gray-400 font-normal">nomy</span>
+            </h1>
+            <p className="mt-2 text-sm text-gray-500">
+              sparking the creator economy
+            </p>
+          </div>
         </div>
       </div>
     </div>
