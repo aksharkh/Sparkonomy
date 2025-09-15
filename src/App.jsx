@@ -9,6 +9,7 @@ import { FiPlusCircle, FiCalendar } from "react-icons/fi";
 import EarningsCard from "./common/EarningsCard";
 import IncomeTrendCard from "./common/IncomeTrendCard";
 import CombinedChart from "./common/CombinedChart";
+import { PiCrown } from "react-icons/pi";
 
 export default function App() {
   const chartData = [
@@ -23,8 +24,8 @@ export default function App() {
   const earningsData = {
     total: { title: "Total Earnings", amount: "$1,25,000" },
     halfCards: [
-      { title: "Pending", amount: "$25,000", color: "text-yellow-500" },
-      { title: "Received", amount: "$1,00,000", color: "text-green-600" },
+      { title: "Pending", amount: "$25,000"},
+      { title: "Received", amount: "$1,00,000" },
     ],
   };
 
@@ -96,7 +97,7 @@ export default function App() {
 
       <div className="bg-white flex-1 rounded-t-3xl p-4 overflow-y-auto no-scrollbar">
         <div className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center">
-          <FiPlusCircle className="text-4xl" />
+          <FiPlusCircle className="text-4xl inline-block text-purple-600 mx-1" />
           <h1 className="mt-3 font-bold bg-gradient-to-b from-pink-400 to-purple-600 bg-clip-text text-transparent">
             Create New Invoice
           </h1>
@@ -147,7 +148,7 @@ export default function App() {
 
               <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
                 1Year
-                <GiCrown className="text-xs text-purple-500" />
+                <PiCrown className="text-lg text-purple-500" />
               </div>
             </div>
 
