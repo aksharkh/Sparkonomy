@@ -3,9 +3,7 @@ import { FaWifi } from "react-icons/fa6";
 import { GiNetworkBars, GiCrown } from "react-icons/gi";
 import { IoBatteryFull, IoPawSharp } from "react-icons/io5";
 import { IoIosArrowBack } from "react-icons/io";
-import { CgProfile } from "react-icons/cg";
 import { FiPlusCircle, FiCalendar } from "react-icons/fi";
-
 import EarningsCard from "./common/EarningsCard";
 import IncomeTrendCard from "./common/IncomeTrendCard";
 import CombinedChart from "./common/CombinedChart";
@@ -24,7 +22,7 @@ export default function App() {
   const earningsData = {
     total: { title: "Total Earnings", amount: "$1,25,000" },
     halfCards: [
-      { title: "Pending", amount: "$25,000"},
+      { title: "Pending", amount: "$25,000" },
       { title: "Received", amount: "$1,00,000" },
     ],
   };
@@ -77,36 +75,42 @@ export default function App() {
   ];
 
   return (
-    <div className="bg-[#E7CCE5] max-w-sm h-screen mx-auto flex flex-col">
-      <div className="flex justify-between items-center p-4 text-sm">
-        <span className="font-bold">9:45</span>
-        <div className="flex gap-2">
+    <div className="bg-[#E7CCE5] min-h-screen w-full flex flex-col">
+      <div className="flex justify-between items-center p-4 text-sm md:hidden">
+        <span className="font-bold text-base">9:45</span>
+        <div className="flex gap-2 text-base">
           <FaWifi />
           <GiNetworkBars />
           <IoBatteryFull />
         </div>
       </div>
 
-      <div className="flex justify-between items-center px-4 pb-2">
-        <button className="flex items-center gap-1 text-gray-700">
-          <IoIosArrowBack /> Back
+      <div className="flex justify-between items-center px-4 sm:px-6 md:px-12 lg:px-16 py-4 sm:py-6 md:py-8 bg-[#E7CCE5]">
+        <button className="flex items-center gap-2 text-gray-700 text-sm sm:text-base md:text-lg lg:text-xl cursor-pointer">
+          <IoIosArrowBack className="text-base sm:text-lg md:text-xl" /> Back
         </button>
-        <span className="font-bold">Dashboard</span>
-        <CgProfile className="text-xl" />
+        <span className="font-bold text-lg sm:text-2xl md:text-3xl lg:text-4xl">
+          Dashboard
+        </span>
+        <img
+          src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNy00MDMucG5n.png"
+          alt="Profile"
+          className="rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
+        />
       </div>
 
-      <div className="bg-white flex-1 rounded-t-3xl p-4 overflow-y-auto no-scrollbar">
+      <div className="bg-white flex-1 rounded-t-3xl p-4 sm:p-6 md:p-12 lg:p-16 overflow-y-auto no-scrollbar">
         <div className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center">
-          <FiPlusCircle className="text-4xl inline-block text-purple-600 mx-1" />
-          <h1 className="mt-3 font-bold bg-gradient-to-b from-pink-400 to-purple-600 bg-clip-text text-transparent">
+          <FiPlusCircle className="text-4xl sm:text-5xl md:text-6xl text-purple-600 mx-1" />
+          <h1 className="mt-3 font-bold bg-gradient-to-b from-pink-400 to-purple-600 bg-clip-text text-transparent text-lg sm:text-2xl md:text-3xl lg:text-4xl">
             Create New Invoice
           </h1>
-          <p className="mt-2 text-gray-400 text-sm">
+          <p className="mt-2 text-gray-400 text-sm sm:text-base md:text-lg lg:text-xl">
             Start by creating and sending new invoice
           </p>
         </div>
 
-        <p className="mt-6 text-center text-purple-500 text-sm px-2">
+        <p className="mt-6 text-center text-purple-500 text-sm sm:text-base md:text-lg lg:text-xl px-2 md:px-0">
           Or upload an existing invoice and set payment reminder
         </p>
 
@@ -116,9 +120,9 @@ export default function App() {
             amount={earningsData.total.amount}
           />
 
-          <div className="flex gap-4">
+          <div className="flex flex-col md:flex-row gap-4">
             {earningsData.halfCards.map((card, index) => (
-              <div key={index} className="w-1/2">
+              <div key={index} className="w-full md:w-1/2">
                 <EarningsCard
                   title={card.title}
                   amount={card.amount}
@@ -129,34 +133,37 @@ export default function App() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-3 mt-6">
+        <div className="bg-white rounded-2xl shadow-sm p-3 mt-6 md:px-6 md:py-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-sm font-semibold text-gray-600">Time Period</h4>
-
-            <div className="text-xs text-gray-400">dd:mm:yyyy - dd:mm:yyyy</div>
+            <h4 className="text-sm sm:text-base md:text-lg font-semibold text-gray-600">
+              Time Period
+            </h4>
+            <div className="text-xs sm:text-sm md:text-base text-gray-400">
+              dd:mm:yyyy - dd:mm:yyyy
+            </div>
           </div>
 
-          <div className="mt-3 flex items-center gap-3 flex-wrap">
+          <div className="mt-3 flex items-center gap-3 flex-wrap justify-between">
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
                 1Month
               </div>
 
-              <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-purple-100 text-purple-600">
+              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-purple-100 text-purple-600">
                 3Months
               </div>
 
-              <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
                 1Year
-                <PiCrown className="text-lg text-purple-500" />
+                <PiCrown className="text-lg md:text-xl text-purple-500" />
               </div>
             </div>
 
             <div className="flex-1" />
 
-            <div className="px-4 py-1 rounded-full text-sm font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
-              <FiCalendar className="text-base" />
-              <span className="text-sm">Custom</span>
+            <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+              <FiCalendar className="text-base md:text-lg" />
+              <span className="text-sm sm:text-base md:text-lg">Custom</span>
             </div>
           </div>
         </div>
@@ -177,15 +184,15 @@ export default function App() {
             />
           ))}
         </div>
-        {/* Footer Branding */}
+
         <div className="flex items-center justify-center mt-8 mb-6">
           <div className="text-center">
-            <h1 className="text-xl">
+            <h1 className="text-xl sm:text-2xl md:text-3xl lg:text-4xl">
               <span className="font-bold text-gray-700">Spark</span>
-              <IoPawSharp className="inline-block text-gray-600 mx-1" />
+              <IoPawSharp className="inline-block text-purple-600 mx-1" />
               <span className="text-gray-400 font-normal">nomy</span>
             </h1>
-            <p className="mt-2 text-sm text-gray-500">
+            <p className="mt-2 text-sm sm:text-base md:text-lg lg:text-xl text-gray-500">
               sparking the creator economy
             </p>
           </div>

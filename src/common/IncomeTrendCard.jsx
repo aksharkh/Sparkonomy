@@ -18,12 +18,12 @@ const IncomeTrendCard = ({
       <div className="flex items-center gap-3">
         {status && (
           <span
-            className={`px-3 py-1 rounded-full text-sm font-medium ${statusColor}`}
+            className={`px-3 py-1 rounded-full text-sm font-medium cursor-pointer ${statusColor}`}
           >
             {status}
           </span>
         )}
-        {showBell && <FiBell className="text-gray-400 text-lg" />}
+        {showBell && <FiBell className="text-gray-400 text-lg cursor-pointer" />}
       </div>
     </div>
   );
