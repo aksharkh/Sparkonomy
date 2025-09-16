@@ -90,6 +90,9 @@ export default function App() {
   const [incomeTrends, setIncomeTrends] = useState(initialIncomeTrends);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  // NEW: selected time period state (visual only)
+  const [selectedPeriod, setSelectedPeriod] = useState("3Months");
+
   const toggleReminder = (id) => {
     setIncomeTrends((prev) =>
       prev.map((it) => (it.id === id ? { ...it, reminder: !it.reminder } : it))
@@ -154,13 +157,13 @@ export default function App() {
         <img
           src="https://images.rawpixel.com/image_png_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA4L2pvYjEwMzQtZWxlbWVudC0wNy00MDMucG5n.png"
           alt="Profile"
-          className="rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
+          className=" cursor-pointer rounded-full w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16"
         />
       </div>
 
       <div className="bg-white flex-1 rounded-t-3xl p-4 sm:p-6 md:p-12 lg:p-16 overflow-y-auto no-scrollbar">
         <div
-          className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center cursor-pointer"
+          className="bg-gray-200 rounded-2xl px-6 py-6 flex flex-col items-center text-center cursor-pointer shadow-xl"
           onClick={() => setIsModalOpen(true)}
         >
           <FiPlusCircle className="text-4xl sm:text-5xl md:text-6xl text-purple-600 mx-1" />
@@ -195,7 +198,7 @@ export default function App() {
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-sm p-3 mt-6 md:px-6 md:py-4">
+        <div className="bg-white rounded-2xl shadow-xl p-3 mt-6 md:px-6 md:py-4">
           <div className="flex items-center justify-between">
             <h4 className="text-sm sm:text-base md:text-lg font-semibold text-gray-600">
               Time Period
@@ -207,23 +210,50 @@ export default function App() {
 
           <div className="mt-3 flex items-center gap-3 flex-wrap justify-between">
             <div className="flex items-center gap-3 flex-wrap">
-              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+              <button
+                type="button"
+                aria-pressed={selectedPeriod === "1Month"}
+                onClick={() => setSelectedPeriod("1Month")}
+                className={` cursor-pointer px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 ${
+                  selectedPeriod === "1Month"
+                    ? "bg-purple-100 text-purple-600"
+                    : "bg-white border border-gray-200 text-gray-600"
+                }`}
+              >
                 1Month
-              </div>
+              </button>
 
-              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-purple-100 text-purple-600">
+              <button
+                type="button"
+                aria-pressed={selectedPeriod === "3Months"}
+                onClick={() => setSelectedPeriod("3Months")}
+                className={`cursor-pointer px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 ${
+                  selectedPeriod === "3Months"
+                    ? "bg-purple-100 text-purple-600"
+                    : "bg-white border border-gray-200 text-gray-600"
+                }`}
+              >
                 3Months
-              </div>
+              </button>
 
-              <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+              <button
+                type="button"
+                aria-pressed={selectedPeriod === "1Year"}
+                onClick={() => setSelectedPeriod("1Year")}
+                className={`cursor-pointer px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 ${
+                  selectedPeriod === "1Year"
+                    ? "bg-purple-100 text-purple-600"
+                    : "bg-white border border-gray-200 text-gray-600"
+                }`}
+              >
                 1Year
                 <PiCrown className="text-lg md:text-xl text-purple-500" />
-              </div>
+              </button>
             </div>
 
             <div className="flex-1" />
 
-            <div className="px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
+            <div className=" cursor-pointer px-4 py-1 rounded-full text-sm sm:text-base md:text-lg font-medium inline-flex items-center gap-2 bg-white border border-gray-200 text-gray-600">
               <FiCalendar className="text-base md:text-lg" />
               <span className="text-sm sm:text-base md:text-lg">Custom</span>
             </div>

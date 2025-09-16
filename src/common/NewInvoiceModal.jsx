@@ -9,7 +9,7 @@ export default function NewInvoiceModal({ onClose, onCreate }) {
   const submit = (e) => {
     e.preventDefault();
     if (!amount || !dueDate) {
-      // minimal validation; keep behavior simple
+      
       alert("Please enter amount and due date.");
       return;
     }

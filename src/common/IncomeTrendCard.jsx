@@ -6,7 +6,7 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
   const [menuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef();
 
-  // close menu when clicking outside
+
   useEffect(() => {
     const handler = (e) => {
       if (menuRef.current && !menuRef.current.contains(e.target)) {
@@ -18,9 +18,9 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
   }, []);
 
   return (
-    <div className="bg-white rounded-xl p-4 shadow-sm border border-gray-100">
+    <div className="bg-white rounded-xl p-4 shadow-xl border border-gray-100">
       <div className="flex items-center justify-between gap-4">
-        {/* Left side - title + subtitle */}
+        
         <div>
           <div className="text-sm sm:text-base md:text-lg font-semibold text-gray-700">
             {item.title}
@@ -30,7 +30,7 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
           </div>
         </div>
 
-        {/* Right side - status badge (opens custom menu) + reminder toggle */}
+        
         <div className="flex items-center gap-3 relative">
           <div
             ref={menuRef}
@@ -42,7 +42,7 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
             aria-haspopup="true"
             aria-expanded={menuOpen}
           >
-            {/* Colored badge (visual and click target) with down arrow */}
+            
             <div
               className={`px-3 py-1 rounded-full text-xs sm:text-sm inline-flex items-center gap-2 ${item.statusColor} cursor-pointer select-none`}
             >
@@ -55,10 +55,10 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
               />
             </div>
 
-            {/* Custom dropdown menu (appears on click) */}
+          
             {menuOpen && (
               <div
-                className="absolute right-0 mt-2 w-36 bg-white border border-gray-100 rounded-lg shadow-md z-30 pointer-events-auto"
+                className="absolute right-0 mt-2 w-36 bg-white border border-gray-100 rounded-lg shadow-xl z-30 pointer-events-auto"
                 role="menu"
                 aria-label="Status options"
               >
@@ -96,7 +96,7 @@ export default function IncomeTrendCard({ item, onToggleReminder, onChangeStatus
             )}
           </div>
 
-          {/* Bell toggle */}
+      
           <button
             onClick={(e) => {
               e.stopPropagation();
