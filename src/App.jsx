@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { FaWifi } from "react-icons/fa6";
 import { GiNetworkBars, GiCrown } from "react-icons/gi";
 import { IoBatteryFull, IoPawSharp } from "react-icons/io5";
@@ -8,6 +8,7 @@ import EarningsCard from "./common/EarningsCard";
 import IncomeTrendCard from "./common/IncomeTrendCard";
 import CombinedChart from "./common/CombinedChart";
 import { PiCrown } from "react-icons/pi";
+import NewInvoiceModal from "./common/NewInvoiceModal";
 
 export default function App() {
   const chartData = [
@@ -27,52 +28,110 @@ export default function App() {
     ],
   };
 
-  const incomeTrends = [
+  const initialIncomeTrends = [
     {
+      id: 1001,
       title: "Invoice #1001",
       subtitle: "₹10,000, Due: 2024-06-15",
       status: "Overdue",
       statusColor: "bg-red-100 text-red-600",
-      showBell: true,
+      reminder: true,
     },
     {
+      id: 1002,
       title: "Invoice #1002",
       subtitle: "₹15,000, Due: 2024-06-20",
       status: "Pending",
       statusColor: "bg-yellow-100 text-yellow-600",
+      reminder: false,
     },
     {
+      id: 1003,
       title: "Invoice #1003",
       subtitle: "₹20,000, Due: 2024-06-25",
       status: "Paid",
       statusColor: "bg-green-100 text-green-600",
+      reminder: false,
     },
     {
+      id: 1004,
       title: "Invoice #1004",
       subtitle: "₹18,000, Due: 2024-06-28",
       status: "Pending",
       statusColor: "bg-yellow-100 text-yellow-600",
+      reminder: false,
     },
     {
+      id: 1005,
       title: "Invoice #1005",
       subtitle: "₹12,000, Due: 2024-07-01",
       status: "Paid",
       statusColor: "bg-green-100 text-green-600",
+      reminder: false,
     },
     {
+      id: 1006,
       title: "Invoice #1006",
       subtitle: "₹30,000, Due: 2024-07-05",
       status: "Overdue",
       statusColor: "bg-red-100 text-red-600",
-      showBell: true,
+      reminder: true,
     },
     {
+      id: 1007,
       title: "Invoice #1007",
       subtitle: "₹20,000, Due: 2024-07-10",
       status: "Pending",
       statusColor: "bg-yellow-100 text-yellow-600",
+      reminder: false,
     },
   ];
+
+  const [incomeTrends, setIncomeTrends] = useState(initialIncomeTrends);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const toggleReminder = (id) => {
+    setIncomeTrends((prev) =>
+      prev.map((it) => (it.id === id ? { ...it, reminder: !it.reminder } : it))
+    );
+  };
+
+  const statusToColor = (status) => {
+    if (status === "Paid") return "bg-green-100 text-green-600";
+    if (status === "Pending") return "bg-yellow-100 text-yellow-600";
+    if (status === "Overdue") return "bg-red-100 text-red-600";
+    return "bg-gray-100 text-gray-600";
+  };
+
+  // NEW: change status by id and update color
+  const changeStatus = (id, newStatus) => {
+    setIncomeTrends((prev) =>
+      prev.map((it) =>
+        it.id === id
+          ? { ...it, status: newStatus, statusColor: statusToColor(newStatus) }
+          : it
+      )
+    );
+  };
+
+  const createInvoice = ({ title, amount, dueDate, status }) => {
+    const nextId =
+      incomeTrends.length === 0
+        ? 1001
+        : Math.max(...incomeTrends.map((x) => x.id)) + 1;
+
+    const newInvoice = {
+      id: nextId,
+      title: title || `Invoice #${nextId}`,
+      subtitle: `₹${amount}, Due: ${dueDate}`,
+      status: status || "Pending",
+      statusColor: statusToColor(status || "Pending"),
+      reminder: false,
+    };
+
+    setIncomeTrends((prev) => [newInvoice, ...prev]);
+    setIsModalOpen(false);
+  };
 
   return (
     <div className="bg-[#E7CCE5] min-h-screen w-full flex flex-col">
@@ -100,7 +159,10 @@ export default function App() {
       </div>
 
       <div className="bg-white flex-1 rounded-t-3xl p-4 sm:p-6 md:p-12 lg:p-16 overflow-y-auto no-scrollbar">
-        <div className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center">
+        <div
+          className="bg-gray-100 rounded-2xl px-6 py-6 flex flex-col items-center text-center cursor-pointer"
+          onClick={() => setIsModalOpen(true)}
+        >
           <FiPlusCircle className="text-4xl sm:text-5xl md:text-6xl text-purple-600 mx-1" />
           <h1 className="mt-3 font-bold bg-gradient-to-b from-pink-400 to-purple-600 bg-clip-text text-transparent text-lg sm:text-2xl md:text-3xl lg:text-4xl">
             Create New Invoice
@@ -173,14 +235,12 @@ export default function App() {
         </div>
 
         <div className="mt-6 space-y-3 pb-6">
-          {incomeTrends.map((item, index) => (
+          {incomeTrends.map((item) => (
             <IncomeTrendCard
-              key={index}
-              title={item.title}
-              subtitle={item.subtitle}
-              status={item.status}
-              statusColor={item.statusColor}
-              showBell={item.showBell}
+              key={item.id}
+              item={item}
+              onToggleReminder={() => toggleReminder(item.id)}
+              onChangeStatus={(newStatus) => changeStatus(item.id, newStatus)}
             />
           ))}
         </div>
@@ -198,6 +258,13 @@ export default function App() {
           </div>
         </div>
       </div>
+
+      {isModalOpen && (
+        <NewInvoiceModal
+          onClose={() => setIsModalOpen(false)}
+          onCreate={createInvoice}
+        />
+      )}
     </div>
   );
 }
